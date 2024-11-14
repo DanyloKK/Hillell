@@ -1,3 +1,71 @@
+"use strict"
+
+function Student(name, birthday, grades) {
+    this.name = name;
+    this.birthday = birthday;
+    this.grades = grades
+    this.attendance = new Array(25).fill(undefined)
+
+    Object.defineProperty(this, "age", {
+        get() {
+            const date = new Date().getFullYear();
+            return date - this.birthday.getFullYear();
+        }
+    });
+    Object.defineProperty(this, "grade", {
+        get() {
+            const total = this.grades.reduce((prev, current) => prev + current, 0);
+            return total / this.grades.length;
+        }
+    });
+    this.present = function () {
+        let lackMarks = this.attendance.indexOf(undefined);
+        if (lackMarks !== -1) {
+            this.attendance[lackMarks] = true;
+        } else {
+            console.log("Limit exceeded")
+        }
+    }
+    this.absent = function () {
+        let lackMarks = this.attendance.indexOf(undefined);
+        if (lackMarks !== -1) {
+            this.attendance[lackMarks] = false;
+        } else {
+            console.log("Limit exceeded")
+        }
+    }
+    const averageGrades = this.grades.reduce((prev, current) => prev + current, 0) / this.grades.length;
+    this.summary = function () {
+        const array = this.attendance.filter((item) => item === true).length;
+        const average = array / this.attendance.length
+        if (averageGrades > 90 && average > 0.9) {
+            console.log("Молодец!")
+        } else if (averageGrades > 90 && average < 0.9) {
+            console.log("Молодец, но можно лучше!")
+        } else if (averageGrades < 90 && average < 0.9) {
+            console.log("Редиска!")
+        }
+    }
+}
+
+const firstStudent = new Student("Danylo", new Date(2000, 10, 18), [90, 95, 90, 92, 95]);
+firstStudent.present();
+firstStudent.present();
+firstStudent.present();
+firstStudent.present();
+firstStudent.summary();
+console.log(firstStudent.age)
+console.log(firstStudent.attendance);
+const secondStudent = new Student("Vasya", new Date(2000, 9, 20), [90, 95, 90, 92, 95, 55, 99, 100, 85]);
+secondStudent.absent();
+secondStudent.present();
+secondStudent.present();
+secondStudent.absent();
+firstStudent.summary();
+console.log(firstStudent.attendance);
+
+
+/*
 const getInput = document.querySelector(".form__input");
 const getButton = document.querySelector(".form__btn");
 const getMainList = document.querySelector(".js--todos-wrapper");
@@ -62,6 +130,8 @@ getButton.addEventListener(`click`, function (event) {
     }
 
 })
+
+ */
 
 
 /*
