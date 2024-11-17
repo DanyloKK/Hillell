@@ -1,5 +1,119 @@
 "use strict"
 
+class Calculator {
+    constructor(first, second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    plus() {
+        return this.first + this.second;
+    }
+
+    minus() {
+        return this.first - this.second;
+    }
+
+    multiply() {
+        if (this.first === 0 || this.second === 0) {
+            return 0
+        } else {
+            return this.first * this.second;
+        }
+    }
+
+    divide() {
+        if (this.second === 0) {
+            console.log("Не можно ділити на 0!")
+        } else {
+            return this.first / this.second;
+        }
+    }
+
+
+}
+
+const result = new Calculator(22, 33);
+console.log(result.divide());
+console.log(result.minus());
+console.log(result.multiply());
+console.log(result.plus());
+
+
+class Coach {
+    constructor(name, specialization, rating) {
+        this.name = name;
+        this.specialization = specialization;
+        this.rating = rating;
+    }
+
+    displayInfo() {
+        console.log(`${this.name},${this.specialization},${this.rating}`)
+    }
+}
+
+const firstCoach = new Coach("Anna", "Yoga", 4.5);
+firstCoach.displayInfo();
+
+class BankAccount {
+    constructor(balance) {
+        this.balance = balance;
+    }
+
+    withDrawMoney(take) {
+        if (this.balance <= 0) {
+            console.log("Не мае коштів!")
+        } else {
+            this.balance -= take;
+            return this.balance
+        }
+    }
+
+    accountDeposit(put) {
+        this.balance += put;
+        return this.balance;
+    }
+
+    getAccountBalance() {
+        return this.balance;
+    }
+}
+
+const balance = new BankAccount(1000);
+console.log(balance.getAccountBalance());
+balance.withDrawMoney(500);
+console.log(balance.getAccountBalance());
+balance.withDrawMoney(500);
+console.log(balance.getAccountBalance());
+balance.accountDeposit(2500);
+console.log(balance.getAccountBalance());
+
+/*
+function Students(name, surname, birthday, grades) {
+    this.name = name;
+    this.surname = surname;
+    this.birthday = birthday;
+    this.grades = grades;
+    this.addGrades = function (){
+
+    }
+    Object.defineProperty(this, "age", {
+        get() {
+            const day = new Date().getFullYear();
+            return day - this.birthday.getFullYear();
+        }
+    })
+    Object.defineProperty(this, "FullName", {
+        get() {
+            return `${this.name} ${this.surname}`
+        }
+    })
+
+}
+
+ */
+
+/*
 function Student(name, birthday, grades) {
     this.name = name;
     this.birthday = birthday;
@@ -56,6 +170,7 @@ firstStudent.present();
 firstStudent.summary();
 console.log(firstStudent.age)
 console.log(firstStudent.attendance);
+console.log(firstStudent)
 const secondStudent = new Student("Vasya", new Date(2000, 9, 20), [90, 95, 90, 92, 95, 55, 99, 100, 85]);
 secondStudent.absent();
 secondStudent.present();
@@ -64,6 +179,7 @@ secondStudent.absent();
 firstStudent.summary();
 console.log(firstStudent.attendance);
 
+ */
 
 /*
 const getInput = document.querySelector(".form__input");
