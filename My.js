@@ -79,14 +79,134 @@ class BankAccount {
     }
 }
 
-const balance = new BankAccount(1000);
-console.log(balance.getAccountBalance());
-balance.withDrawMoney(500);
-console.log(balance.getAccountBalance());
-balance.withDrawMoney(500);
-console.log(balance.getAccountBalance());
-balance.accountDeposit(2500);
-console.log(balance.getAccountBalance());
+class Wallet {
+    // Конструктор, принимающий начальный баланс
+    constructor(initialBalance = 0) {
+        this.balance = initialBalance; // Текущий баланс
+        this.#transactionHistory = []; // Приватное свойство для хранения истории транзакций
+    }
+
+    // Приватное свойство для хранения истории транзакций
+    #transactionHistory;
+
+    // Метод для добавления средств
+    addFunds(amount) {
+        if (amount <= 0) {
+            console.log("Сумма пополнения должна быть положительной");
+            return;
+        }
+        this.balance += amount;
+        this.#addTransaction("add", amount); // Добавляем запись в историю транзакций
+        console.log(`Пополнено: ${amount} | Баланс: ${this.balance}`);
+    }
+
+    // Метод для снятия средств
+    withdrawFunds(amount) {
+        if (amount <= 0) {
+            console.log("Сумма снятия должна быть положительной");
+            return;
+        }
+        if (amount > this.balance) {
+            console.log("Недостаточно средств");
+            return;
+        }
+        this.balance -= amount;
+        this.#addTransaction("withdraw", amount); // Добавляем запись в историю транзакций
+        console.log(`Снято: ${amount} | Баланс: ${this.balance}`);
+    }
+
+    // Метод для проверки текущего баланса
+    checkBalance() {
+        return this.balance;
+    }
+
+    // Метод для получения истории транзакций
+    getTransactionHistory() {
+        return this.#transactionHistory;
+    }
+
+    // Приватный метод для добавления транзакции в историю
+    #addTransaction(type, amount) {
+        this.#transactionHistory.push({type, amount});
+    }
+}
+
+// Пример использования
+const myWallet = new Wallet(100); // Создаем кошелёк с балансом 100
+myWallet.addFunds(50);            // Пополняем на 50
+myWallet.withdrawFunds(30);       // Снимаем 30
+myWallet.withdrawFunds(200);      // Пытаемся снять 200 (недостаточно средств)
+console.log(`Текущий баланс: ${myWallet.checkBalance()}`); // Текущий баланс
+console.log(myWallet.getTransactionHistory());
+
+// [{ type: 'add', amount: 50 }, { type: 'withdraw', amount: 30 }]
+class Transport {
+    constructor(speed) {
+        this.speed = 0;
+    }
+
+    start() {
+        this.speed = 20;
+
+    }
+
+    stop() {
+        this.speed = 0;
+
+    }
+}
+
+class Car extends Transport {
+    constructor(speed) {
+        super(speed);
+        this.fuel = 100;
+    }
+
+    drive() {
+        this.fuel = this.fuel - 10;
+        this.speed = this.speed + 20;
+    }
+}
+
+class Bicycle extends Transport {
+    constructor(speed,car) {
+        super(speed);
+        this.gear = 1;
+        this.car = Car
+
+    }
+
+    pedal() {
+        this.speed = 5;
+    }
+}
+
+const car = new Car();
+car.drive();
+console.log(car.speed);
+console.log(car.fuel);
+const bicycle = new Bicycle();
+bicycle.pedal();
+console.log(bicycle.speed);
+
+function addNumber (number){
+    let num = number;
+    function plus (){
+        return ++num;
+    }
+    return plus
+}
+
+let result2 = addNumber(2);
+console.log(result2())
+let result3 = addNumber(2);
+let result4 = addNumber(2);
+console.log(result2())
+let result5 = addNumber(2);
+let resul6 = addNumber(2);
+console.log(result2())
+
+
 
 /*
 function Students(name, surname, birthday, grades) {
