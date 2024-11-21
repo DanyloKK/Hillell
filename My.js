@@ -1,4 +1,44 @@
 "use strict"
+const text = document.querySelector("p");
+const startBtn = document.querySelector(".start");
+const stopBtn = document.querySelector(".stop");
+const resetBtn = document.querySelector(".reset");
+let initialValue = text.textContent;
+let timerId;
+
+
+function startCountDown() {
+    let [hours, minutes, seconds] = initialValue.split(":").map(Number);
+    let time =  minutes * 60 + seconds;
+    if (time > 0) {
+        time -= 1
+        let newMinutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        text.textContent = `${String(newMinutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+        initialValue = text.textContent
+    } else {
+        clearInterval(timerId);
+    }
+
+}
+
+
+function resetTimer() {
+    initialValue = "1:30";
+    text.textContent = initialValue;
+    clearInterval(timerId);
+}
+
+startBtn.addEventListener("click", () => {
+    timerId = setInterval(startCountDown, 1000);
+});
+stopBtn.addEventListener("click", () => {
+    clearInterval(timerId);
+});
+resetBtn.addEventListener("click", resetTimer);
+
+
+
 
 class Calculator {
     constructor(first, second) {
