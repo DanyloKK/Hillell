@@ -8,8 +8,8 @@ let timerId;
 
 
 function startCountDown() {
-    let [hours, minutes, seconds] = initialValue.split(":").map(Number);
-    let time =  minutes * 60 + seconds;
+    let [minutes, seconds] = initialValue.split(":").map(Number);
+    let time = minutes * 60 + seconds;
     if (time > 0) {
         time -= 1
         let newMinutes = Math.floor(time / 60);
@@ -38,8 +38,7 @@ stopBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", resetTimer);
 
 
-
-
+/*
 class Calculator {
     constructor(first, second) {
         this.first = first;
